@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+    <style>
+        .button {
+        background-color: #feda77; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+        .button2{
+            background-color: #FFE869;
+        }
+    </style>
+</head>
+<body>
+upload
+      <form action = "http://localhost:5000" method = "POST" enctype = "multipart/form-data">
+{#         <input type = "file" name = "file" />#}
+{#         <input type = "submit"/>#}
+        <input type="file" id="file" name="file" runat="server"  style="position:relative; z-index:100px; filter:alpha(opacity=0);-moz-opacity:0; opacity:0; left:-155px;"   οnchange="filechang($(this))" >
+        <input type="button" class="button" value="选择" style="margin-left:-223px" />
+        <input class="button button2"  type =submit value="上传" style="margin-left: 30px">
+
+      </form>
+
+{#<input type="button" value="test"  onclick="f()"/>#}
+	<p id="display">{{ temp }}</p>
+
+<input type="button" value="=w="  onclick="readexcel()"/>
+</body>
+<script>
+function f() {
+   {
+       $.ajax(
+      {
+         type: "POST",
+         url: "/hello",
+         {#dataType: "html",#}
+         success: function(msg)
+         {
+             console.log(msg);
+             $("#display").html(msg);//注意显示的id
+         },
+         error: function (xhr, status, error) {
+            console.log(error);
+        }
+      });
+   }
+}
+function readexcel() {
+   {
+       $.ajax(
+      {
+         type: "POST",
+         url: "/readexcel",
+         {#dataType: "html",#}
+         success: function(msg)
+         {
+             console.log(msg);
+             $("#display").html(msg);//注意显示的id
+         },
+         error: function (xhr, status, error) {
+            console.log(error);
+        }
+      });
+   }
+}
+</script>
+</html>
