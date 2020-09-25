@@ -4,6 +4,7 @@ from os import path
 import os
 from random import *
 import xlrd
+import pymysql
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'video')
@@ -50,7 +51,34 @@ def readexcel():
     sheet_cell = sheet.cell(0, 0)
     sheet_cell_value = sheet_cell.value  # 返回单元格的值
     data = sheet_cell_value
-    return render_template("hello.html", temp=data)
+    return render_template("readExcel.html", temp=data)
+    # return render_template("hello.html", temp=data)
+
+conn = pymysql.connect(
+    host='127.0.0.1',
+    user='root',
+    password='123456',
+    db='film',
+    charset='utf8'
+)
+
+
+@app.route('/film')
+def film():
+    cur = conn.cursor()
+
+    # get annual sales rank
+    sql = "select * from film"
+    cur.execute(sql)
+    content = cur.fetchall()
+
+	# 获取表头
+    sql = "SHOW FIELDS FROM film"
+    cur.execute(sql)
+    labels = cur.fetchall()
+    labels = [l[0] for l in labels]
+
+    return render_template('readExcel.html', labels=labels, content=content)
 
 if __name__ == '__main__':
     app.run(debug=True)  # 普通启动

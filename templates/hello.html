@@ -23,7 +23,7 @@
 div.main{
     margin:15% 20%;
     text-align: center;
-    font-size: 30px;
+    {#font-size: 30px;#}
     border:1px solid #F00
 }
     </style>
@@ -55,15 +55,19 @@ function f() {
          type: "POST",
          url: "/hello",
          dataType: "html",
-         success: function(msg)
+         success: function(temp)
          {
-             console.log(msg);
-             $("#display").html(msg);//注意显示的id
+             console.log(temp);
+             {#$("#display").html(temp);//注意显示的id#}
+             $("#display").html(temp)
+
          },
          error: function (xhr, status, error) {
             console.log(error);
         }
+
       });
+       {#location.reload();#}
    }
 }
 function readexcel() {
@@ -83,6 +87,7 @@ function readexcel() {
             console.log(error);
         }
       });
+       {#location.reload();#}
    }
 }
 </script>
