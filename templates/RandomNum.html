@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+
+    <style>
+        .button {
+    background-color: #feda77;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.button2{
+    background-color: #FFE869;
+}
+div.main{
+    margin:15% 20%;
+    text-align: center;
+    font-size: 30px;
+    border:1px solid #F00
+}
+    </style>
+
+
+</head>
+<body>
+
+<div class="main">
+    <br>
+	<p id="display">{{ temp }}</p>
+<input type="button" value=">w<"  onclick="f()"/>
+</div>
+
+
+</body>
+<script>
+function f() {
+   {
+       $.ajax(
+      {
+         type: "POST",
+         url: "/hello",
+         dataType: "html",
+         success: function(temp)
+         {
+             console.log(temp);
+             {#$("#display").html(temp);//注意显示的id#}
+             $("#display").hover(temp)
+
+         },
+         error: function (xhr, status, error) {
+            console.log(error);
+        }
+
+      });
+       location.reload();
+   }
+}
+</script>
+</html>

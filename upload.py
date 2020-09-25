@@ -24,7 +24,7 @@ def Hello():
 
     message = "hi"
     num = randint(1, 100)
-    return render_template("hello.html", temp=num)
+    return render_template("RandomNum.html", temp=num)
 
 @app.route("/readexcel", methods=['GET', 'POST'])
 def readexcel():
