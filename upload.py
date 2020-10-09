@@ -11,6 +11,7 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'video')
 '''
 实现文件上传
 '''
+
 @app.route("/",methods=['GET','POST'])
 def upload():
     if request.method=='POST':
@@ -26,7 +27,7 @@ def upload():
 测试用函数
 '''
 @app.route("/hello", methods=['GET', 'POST'])
-def Hello():
+def hello():
 
     message = "hi"
     num = randint(1, 100)
@@ -61,17 +62,18 @@ def readexcel():
     return render_template("readExcel.html", temp=data)
     # return render_template("hello.html", temp=data)
 
-conn = pymysql.connect(
-    host='127.0.0.1',
-    user='root',
-    password='123456',
-    db='film',
-    charset='utf8'
-)
+
 
 #获取数据库中的数据，在html中用表格显示
 @app.route('/film')
 def film():
+    conn = pymysql.connect(
+        host='127.0.0.1',
+        user='root',
+        password='123456',
+        db='film',
+        charset='utf8'
+    )
     cur = conn.cursor()
 
     # get annual sales rank
@@ -84,7 +86,6 @@ def film():
     cur.execute(sql)
     labels = cur.fetchall()
     labels = [l[0] for l in labels]
-
     return render_template('readExcel.html', labels=labels, content=content)
 
 if __name__ == '__main__':

@@ -43,7 +43,7 @@
         </div>
 
     </div>
-
+<input class="button"   value="返回" style="margin-left: 30px" onclick="index()">
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -56,5 +56,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script>
+    {#跳转到结果界面#}
+function index()
+    {
+        {#window.open("{{ url_for("http://localhost:5000") }}","_self");#}
+    }
+</script>
 </body>
 </html>
