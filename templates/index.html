@@ -56,8 +56,9 @@
     <input class="button"   value="获取结果" style="margin-left: 30px" onclick="film()">
     <br>
 	<p id="display">{{ temp }}</p>
-<input type="button" value=">w<"  onclick="film()"/>
-<input type="button" value="=w="  onclick="readexcel()"/>
+<input type="button" value=">w<"  onclick="getfilm()"/>
+{#    测试用#}
+<input type="button" value="=w="  onclick="hello()"/>
 
 </div>
 
@@ -66,9 +67,17 @@
 </body>
 <script>
     {#跳转到结果界面#}
-function film()
+    function film()
     {
         window.open("{{ url_for("film") }}","_self");
+    }
+    function getfilm()
+    {
+        window.open("{{ url_for("getfilm") }}","_self");
+    }
+    function hello()
+    {
+        window.open("{{ url_for("hello") }}","_self");
     }
 function readexcel() {
    {
