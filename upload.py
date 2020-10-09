@@ -8,18 +8,23 @@ import pymysql
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'video')
-
+'''
+实现文件上传
+'''
 @app.route("/",methods=['GET','POST'])
 def upload():
     if request.method=='POST':
         f = request.files["file"]
         base_path = path.abspath(path.dirname(__file__))
-        # file_name = secure_filename(f.filename)
         file_name = f.filename
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
         return redirect(url_for('upload'))
-    return render_template('hello.html')
+    return render_template('index.html')
 
+
+'''
+测试用函数
+'''
 @app.route("/hello", methods=['GET', 'POST'])
 def Hello():
 
@@ -27,6 +32,8 @@ def Hello():
     num = randint(1, 100)
     return render_template("RandomNum.html", temp=num)
 
+
+#读取excel表格数据
 @app.route("/readexcel", methods=['GET', 'POST'])
 def readexcel():
     excel_path = "result.xls"
@@ -62,7 +69,7 @@ conn = pymysql.connect(
     charset='utf8'
 )
 
-
+#获取数据库中的数据，在html中用表格显示
 @app.route('/film')
 def film():
     cur = conn.cursor()
