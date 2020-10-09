@@ -24,6 +24,7 @@ import numpy as np
 from PIL import Image
 from PIL import ImageEnhance
 import PIL.Image as video_img
+import pandas as pd
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'video')
@@ -431,8 +432,12 @@ def getfilm():
 
     datafile = "newEmotion.xls"  # 新电影情绪分，没有观众打分
     [matrix, col] = excel_to_matrix(datafile)
-    str = "视频正在解析..."
-    return render_template("RandomNum.html",temp=str)
+
+ # --------------------------读取excel,将excel写入数据库----------------------------#
+
+# --------------------------显示数据----------------------------#
+    num = randint(1, 100)
+    return render_template("RandomNum.html", temp=num)
 
 #读取excel表格数据
 @app.route("/readexcel", methods=['GET', 'POST'])
@@ -460,16 +465,44 @@ def readexcel():
     sheet_cell_value = sheet_cell.value  # 返回单元格的值
     data = sheet_cell_value
     return render_template("readExcel.html", temp=data)
-    # return render_template("hello.html", temp=data)
 
+@app.route("/write")
+def write():
+    excelFile = r'result.xls'
+    df = pd.DataFrame(pd.read_excel(excelFile))
+    from sqlalchemy import create_engine
+    import pymysql
+
+    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/film', encoding='utf8')
+    df.to_sql('film', con=engine, if_exists='replace', index=False)
+
+
+
+    conn = pymysql.connect(
+        host='127.0.0.1',
+        user='root',
+        password='123456',
+        db='film',
+        charset='utf8'
+    )
+    cur = conn.cursor()
+
+    # get annual sales rank
+    sql = "select * from film"
+    cur.execute(sql)
+    content = cur.fetchall()
+
+    # 获取表头
+    sql = "SHOW FIELDS FROM film"
+    cur.execute(sql)
+    labels = cur.fetchall()
+    labels = [l[0] for l in labels]
+    return render_template('readExcel.html', labels=labels, content=content)
 
 
 #获取数据库中的数据，在html中用表格显示
 @app.route('/film')
 def film():
-    '''
-    视频解析
-    '''
 
     '''
     数据库

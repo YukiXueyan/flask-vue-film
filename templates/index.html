@@ -53,16 +53,15 @@
     <input type="button" class="button" value="选择文件" style="margin-left:-223px" />
     <input class="button button2"  type =submit value="上传文件" style="margin-left: 30px" >
       </form>
-    <input class="button"   value="获取结果" style="margin-left: 30px" onclick="film()">
+    <input class="button"   value="获取结果" style="margin-left: 30px" onclick="getfilm()">
     <br>
 	<p id="display">{{ temp }}</p>
-<input type="button" value=">w<"  onclick="getfilm()"/>
+<input type="button" value="测试界面跳转"  onclick="film()"/>
 {#    测试用#}
-<input type="button" value="=w="  onclick="hello()"/>
+{#<input type="button" value="=w="  onclick="hello()"/>#}
 
 </div>
 
-<div onclick="testclick()">test</div>
 
 </body>
 <script>
@@ -79,26 +78,7 @@
     {
         window.open("{{ url_for("hello") }}","_self");
     }
-function readexcel() {
-   {
-       $.ajax(
-      {
-         type: "POST",
-         url: "/readexcel",
-         dataType: "html",
-         success: function(msg)
-         {
-             console.log(msg);
-             console.log("qwq")
-             $("#display").html(msg);//注意显示的id
-         },
-         error: function (xhr, status, error) {
-            console.log(error);
-        }
-      });
-       {#location.reload();#}
-   }
-}
+
 
 </script>
 </html>
