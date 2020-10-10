@@ -433,41 +433,9 @@ def getfilm():
     datafile = "newEmotion.xls"  # 新电影情绪分，没有观众打分
     [matrix, col] = excel_to_matrix(datafile)
 
- # --------------------------读取excel,将excel写入数据库----------------------------#
+    # 将excel数据写入数据库-----------------------------------------------------------------------------------------------------
 
-# --------------------------显示数据----------------------------#
-    num = randint(1, 100)
-    return render_template("RandomNum.html", temp=num)
 
-#读取excel表格数据
-@app.route("/readexcel", methods=['GET', 'POST'])
-def readexcel():
-    excel_path = "result.xls"
-
-    # 打开文件，获取excel文件的workbook（工作簿）对象
-    excel = xlrd.open_workbook(excel_path, encoding_override="utf-8")
-
-    # 获取sheet对象
-    all_sheet = excel.sheets()
-
-    # 循环遍历每个sheet对象
-    for sheet in all_sheet:
-        # print("该Excel共有{0}个sheet,当前sheet名称为{1},该sheet共有{2}行,{3}列"
-        #       .format(len(all_sheet), sheet.name, sheet.nrows, sheet.ncols))
-        for x in range(sheet.nrows):
-            for y in range(sheet.ncols):
-                sheet_cell = sheet.cell(x, y)
-                sheet_cell_value = sheet_cell.value  # 返回单元格的值
-                print(sheet_cell_value)
-                data = sheet_cell_value
-
-    sheet_cell = sheet.cell(0, 0)
-    sheet_cell_value = sheet_cell.value  # 返回单元格的值
-    data = sheet_cell_value
-    return render_template("readExcel.html", temp=data)
-
-@app.route("/write")
-def write():
     excelFile = r'result.xls'
     df = pd.DataFrame(pd.read_excel(excelFile))
     from sqlalchemy import create_engine
@@ -476,8 +444,7 @@ def write():
     engine = create_engine('mysql+pymysql://root:123456@localhost:3306/film', encoding='utf8')
     df.to_sql('film', con=engine, if_exists='replace', index=False)
 
-
-
+    # 将sql展示到前端-----------------------------------------------------------------------------------------------------
     conn = pymysql.connect(
         host='127.0.0.1',
         user='root',
@@ -503,15 +470,21 @@ def write():
 #获取数据库中的数据，在html中用表格显示
 @app.route('/film')
 def film():
+    # 将excel数据写入数据库-----------------------------------------------------------------------------------------------------
+    excelFile = r'result.xls'
+    df = pd.DataFrame(pd.read_excel(excelFile))
+    from sqlalchemy import create_engine
+    import pymysql
 
-    '''
-    数据库
-    '''
+    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/film', encoding='utf8')
+    df.to_sql('film', con=engine, if_exists='replace', index=False)
+
+    # 将sql展示到前端-----------------------------------------------------------------------------------------------------
     conn = pymysql.connect(
         host='127.0.0.1',
-        user='root',
-        password='123456',
-        db='film',
+        user='root',#数据库名称
+        password='123456',#数据库密码
+        db='film',#表名称
         charset='utf8'
     )
     cur = conn.cursor()
@@ -521,12 +494,13 @@ def film():
     cur.execute(sql)
     content = cur.fetchall()
 
-	# 获取表头
+    # 获取表头
     sql = "SHOW FIELDS FROM film"
     cur.execute(sql)
     labels = cur.fetchall()
     labels = [l[0] for l in labels]
     return render_template('readExcel.html', labels=labels, content=content)
+
 
 if __name__ == '__main__':
     app.run(debug=True)  # 普通启动
