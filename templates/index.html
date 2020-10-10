@@ -23,7 +23,7 @@
     div.main{
         {#margin:15% 20%;#}
         {#margin-left: 10%;#}
-        margin-top: 200px;
+        margin-top: 150px;
         text-align: center;
         {#top:400px;#}
     }
@@ -33,7 +33,9 @@
     .sTitle{
         font-size: 20px;
     }
-
+    .left{
+        float: left;
+    }
 
     </style>
 
@@ -48,15 +50,21 @@
     </div>
 </div>
 <div class="main">
+    <div class="left">
+    <img src="logo.png">
+    </div>
+    <div class="left">
       <form action = "http://localhost:5000" method = "POST" enctype = "multipart/form-data">
     <input type="file" id="file" name="file" runat="server"  style="position:relative; z-index:100px; filter:alpha(opacity=0);-moz-opacity:0; opacity:0; left:-155px;"   οnchange="filechang($(this))" >
     <input type="button" class="button" value="选择文件" style="margin-left:-250px" />
+          <br>
 {#    <input class="button button2"  type =submit value="上传文件" style="margin-left: 30px" >#}
           <input class="button button2"  type =submit value="上传文件"  >
       </form>
     <br>
     <input type="button" class="button"   value="获取结果"  onclick="getfilm()">
     <br>
+    </div>
 {#    <input type="button" class="button" value="查看结果" style="height: 30px" onclick="film()"/>#}
 </div>
 
