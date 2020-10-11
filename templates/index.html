@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>AIMovie 艾慕尾 ——值得信赖的观影小助手</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>AIMovie 艾慕尾 ——值得信赖的观影小助手</title>
     <style>
-    .button {
-    background-color: #ffcc00;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
-    }
-    .button2{
-        background-color: #ffcc00;
+    .left{
+    float: left;
     }
     div.main{
-        {#margin:15% 20%;#}
-        {#margin-left: 10%;#}
-        margin-top: 50px;
-        {#text-align: center;#}
-        padding-left: 350px;
+    margin-top: 15%;
+    margin-left:15%;
+
     }
     .top{
         top:0;
@@ -34,82 +25,87 @@
     .sTitle{
         font-size: 20px;
     }
-    .left{
-        float: left;
-    }
-    body{
-        {#text-align: center;#}
-    }
     .back{
-        padding: 20px 50px;
-        background-color: rgba(255,204,0,0.1);
+        margin-left:700px;
     }
-
+    #formbackground{
+    background:url(../static/back2.png) no-repeat;
+    width:100%;
+    margin-left: 300px;
+    }
+    .button {
+        background-color: #333333;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+    .button2{
+         background-color: #333333;
+    }
+    div.main{
+        z-index: 111;
+        margin-top: 50px;
+    }
     </style>
-
-
 </head>
 <body>
 <div class="top" style="width:100%;height: 60px;background-color: #ffcc00;top:0px"onclick="film()">
     <div style="margin-left: 300px">
     <h1 style="font-weight: normal">AIMovie 艾慕尾<span class="sTitle">  ——值得信赖的观影小助手</span></h1>
-
-
     </div>
+</div>
+<div id="formbackground" style="position:absolute; width:100%; height:100%; z-index:-100">
+
 </div>
 <div class="main" >
     <h1 style="color: #2c3e50">上传你的观影视频</h1>
         <h3 style="margin-left: 120px;color: #2c3e50">获取AI电影评分</h3>
-    <div ">
-    <div class="left">
-    <img src="../static/logo.png" style="width: 300px;height: 300px;margin-top: 50px">
-    </div>
+    <div >
     <div class="left" >
-        <div class="back" style="margin-left: 200px;">
+        <div class="back" style="margin-left: 200px;margin-top: 150px">
       <form action = "http://localhost:5000" method = "POST" enctype = "multipart/form-data">
     <input type="file" id="file" name="file" runat="server"  style="position:relative; z-index:100px; filter:alpha(opacity=0);-moz-opacity:0; opacity:0; left:-155px;"   οnchange="filechang($(this))" >
-    <input type="button" class="button" value="选择文件" style="margin-left:-250px" />
-          <br><br><br>
+    <input type="button" class="button" value="选择文件" style="margin-left:-290px" />
+          <br><br>
 {#    <input class="button button2"  type =submit value="上传文件" style="margin-left: 30px" >#}
-          <input class="button button2"  type =submit value="上传文件"  >
+          <input class="button" id="submitfile"  type =submit value="上传文件"  >
       </form>
-{#    <br>#}<br><br>
-    <input type="button" class="button"   value="获取结果"  onclick="getfilm()">
+{#    <br>#} <br style="height: 50px">
+    <input type="button" class="button"  id="getresult"  value="获取结果"  onclick="getfilm()">
     <br>
-            <h5 onclick="ans()" style="color: #2c3e50">------有疑问点这里------</h5>
+
     </div>
         </div>
-{#    <input type="button" class="button" value="查看结果" style="height: 30px" onclick="film()"/>#}
     </div>
 
 </div>
-{#    <div class="fbottom" style="text-align: center;border: 1px solid aqua; width: 100%;bottom: 800px" onclick="ans()"> ------有疑问点这里------</div>#}
+<div class="bottom">
+    <h5 onclick="ans()" style="color: #2c3e50">------有疑问点这里------</h5>
+</div>
 
-
-</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 <script>
     {#跳转到结果界面#}
-    function film()
+function index()
     {
-        window.open("{{ url_for("film") }}","_self");
+        {#window.open("{{ url_for("http://localhost:5000") }}","_self");#}
     }
-    {#运行从视频分帧到得出结果的代码#}
-    function getfilm()
-    {
-        window.open("{{ url_for("getfilm") }}","_self");
-    }
-    function ans() {
-        var ans = "操作步骤："+'\n' +
-            "1、点击‘选择文件’，选择观影视频"+'\n' +
-            "2、点击‘上传文件’"+'\n' +
-            "3、点击‘获取结果’，得到AI评分"+'\n' +
-            "！！！以下因素将影响AI评分的效果："+'\n' +
-            "1、视频的清晰度。系统对模糊的视频识别度不高，可能得不到AI评分。"+'\n'+
-            "2、人物脸部需要清晰无遮挡。当视频中人物的脸部被遮挡或未出现完整脸部的时候，系统也无法识别到表情，进而得不到评分"
-        alert(ans)
-    }
-
-
-
 </script>
+</div>
+</body>
 </html>
