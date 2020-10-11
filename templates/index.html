@@ -94,7 +94,8 @@
 
 </div>
 <div class="bottom">
-    <h5 id="confirmDescConfirmIcon" style="color: #2c3e50">------有疑问点这里------</h5>
+    <h5 id="confirmTitleMsgAutoClose" style="color: #2c3e50" onclick="ans()">------有疑问点这里------</h5>
+{#    <h3 onclick="ans()">ans</h3>#}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -117,34 +118,23 @@
     {
         window.open("{{ url_for("getfilm") }}","_self");
     }
-    function ans() {
-        var ans = "操作步骤："+'\n' +
-            "1、点击‘选择文件’，选择观影视频"+'\n' +
-            "2、点击‘上传文件’"+'\n' +
-            "3、点击‘获取结果’，得到AI评分"+'\n' +
-            "！！！以下因素将影响AI评分的效果："+'\n' +
-            "1、视频的清晰度。系统对模糊的视频识别度不高，可能得不到AI评分。"+'\n'+
-            "2、人物脸部需要清晰无遮挡。当视频中人物的脸部被遮挡或未出现完整脸部的时候，系统也无法识别到表情，进而得不到评分"
-        alert(ans)
-    }
 </script>
     <link rel="stylesheet" href="{{ url_for('static',filename='css/dialog.css') }}">
     <script src="{{ url_for('static',filename='js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/jquery.dialog.js') }}"></script>
 <script>
-    $('#confirmDescConfirmIcon').click(function() {
-      $.sendConfirm({
+    function ans() {
+    $.dialog({
         hideHeader: true,
-        desc: '商品信息有变动（<span class="text-info">可能是有库存不足、价格调整或商品失效等情况发生</span>）<br>请再次确认并重新提交订单 ：',
-        button: {
-          confirm: '确定',
-          cancel: null,
-        },
-        onConfirm: function() {
-          console.log('点击确认！');
-        },
-      });
+        content: ' 操作步骤<br>' +
+                '             1、点击‘选择文件’，选择观影视频      <br>' +
+                '             2、点击‘上传文件’    <br>' +
+                '             3、点击‘获取结果’，得到AI评分      <br>' +
+                '             ！！！以下因素将影响AI评分的效果：     <br>' +
+                '             1、视频的清晰度。系统对模糊的视频识别度不高，可能得不到AI评分。     <br>' +
+                '             2、人物脸部需要清晰无遮挡。当视频中人物的脸部被遮挡或未出现完整脸部的时候，系统也无法识别到表情，进而得不到评分<br>',
     });
+    }
 
 
 
