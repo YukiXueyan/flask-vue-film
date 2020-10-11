@@ -441,26 +441,26 @@ def getfilm():
     from sqlalchemy import create_engine
     import pymysql
 
-    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/film', encoding='utf8')
-    df.to_sql('film', con=engine, if_exists='replace', index=False)
+    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/filmback', encoding='utf8')
+    df.to_sql('filmback', con=engine, if_exists='replace', index=False)
 
     # 将sql展示到前端-----------------------------------------------------------------------------------------------------
     conn = pymysql.connect(
         host='127.0.0.1',
         user='root',
         password='123456',
-        db='film',
+        db='filmback',
         charset='utf8'
     )
     cur = conn.cursor()
 
     # get annual sales rank
-    sql = "select * from film"
+    sql = "select * from filmback"
     cur.execute(sql)
     content = cur.fetchall()
 
     # 获取表头
-    sql = "SHOW FIELDS FROM film"
+    sql = "SHOW FIELDS FROM filmback"
     cur.execute(sql)
     labels = cur.fetchall()
     labels = [l[0] for l in labels]
@@ -476,26 +476,26 @@ def film():
     from sqlalchemy import create_engine
     import pymysql
 
-    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/film', encoding='utf8')
-    df.to_sql('film', con=engine, if_exists='replace', index=False)
+    engine = create_engine('mysql+pymysql://root:123456@localhost:3306/filmback', encoding='utf8')
+    df.to_sql('filmback', con=engine, if_exists='replace', index=False)
 
     # 将sql展示到前端-----------------------------------------------------------------------------------------------------
     conn = pymysql.connect(
         host='127.0.0.1',
         user='root',#数据库名称
         password='123456',#数据库密码
-        db='film',#表名称
+        db='filmback',#表名称
         charset='utf8'
     )
     cur = conn.cursor()
 
     # get annual sales rank
-    sql = "select * from film"
+    sql = "select * from filmback"
     cur.execute(sql)
     content = cur.fetchall()
 
     # 获取表头
-    sql = "SHOW FIELDS FROM film"
+    sql = "SHOW FIELDS FROM filmback"
     cur.execute(sql)
     labels = cur.fetchall()
     labels = [l[0] for l in labels]

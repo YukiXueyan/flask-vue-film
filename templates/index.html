@@ -43,6 +43,9 @@
         padding: 20px 50px;
         background-color: rgba(255,204,0,0.1);
     }
+        div{
+            border: #FF0000 solid 1px;
+        }
     </style>
 
 
@@ -56,8 +59,8 @@
     </div>
 </div>
 <div class="main" >
-    <h1 style="color: #2c3e50">上传观众观影视频</h1>
-        <h3 style="margin-left: 120px;color: #2c3e50">获取认知AI电影评分</h3>
+    <h1 style="color: #2c3e50">上传你的观影视频</h1>
+        <h3 style="margin-left: 120px;color: #2c3e50">获取AI电影评分</h3>
     <div class="left">
     <img src="../static/logo.png" style="width: 300px;height: 300px">
     </div>
@@ -76,7 +79,9 @@
     </div>
         </div>
 {#    <input type="button" class="button" value="查看结果" style="height: 30px" onclick="film()"/>#}
+
 </div>
+    <div class="fbottom" style="text-align: center;border: 1px solid aqua; width: 100%;bottom: 800px" onclick="ans()"> ------有疑问点这里------</div>
 
 
 </body>
@@ -90,6 +95,16 @@
     function getfilm()
     {
         window.open("{{ url_for("getfilm") }}","_self");
+    }
+    function ans() {
+        var ans = "操作步骤：/n" +
+            "1、点击‘选择文件’，选择观影视频/n" +
+            "2、点击‘上传文件’/n" +
+            "3、点击‘获取结果’，得到AI评分/n" +
+            "----------------------------------------/n" +
+            "为什么得不到评分or评分偏差大呢？/n" +
+            "1、"
+        alert(ans)
     }
 
 
